@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/tokens.css}"/>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/components.css}"/>
+    <title>Register new user</title>
+</head>
+<body>
+
+		<div class="outer-container">
+			<div class="inner-container">
+
+				<a href="/login" class="back-link">
+				<span class="arrow">&#8592;</span>
+				<span class="back-text">Back</span>
+				</a>
+
+				<h2 class="page-title">Create new user</h2>
+
+					<form th:action="@{/register}" th:object="${user}" method="post" class="auth-form">
+
+						<div class="form-group">
+							<input type="text" th:field="*{firstName}" placeholder="Enter First name">
+							<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+						</div>
+
+						<div class="form-group">
+							<input type="text" th:field="*{lastName}" placeholder="Enter Last name">
+							<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+						</div>
+
+						<div class="form-group">
+							<input type="email" th:field="*{email}" placeholder="Enter email">
+							<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+						</div>
+
+						<div class="form-group">
+							<input type="password" th:field="*{rawPassword}" placeholder="Enter password">
+							<div th:if="${#fields.hasErrors('rawPassword')}" th:errors="*{rawPassword}"></div>
+						</div>
+
+						<div class="form-group">
+							<input type="password" th:field="*{confirmPassword}" placeholder="Re-enter password">
+							<div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+						</div>
+
+							<button type="submit" class="btn btn--primary">Save</button>
+					</form>
+		</div>
+	</div>
+</body>
+</html>

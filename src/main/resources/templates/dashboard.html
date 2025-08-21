@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/tokens.css}" />
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/components.css}" />
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+    <title>Dashboard</title>
+</head>
+<body class="dashboard">
+
+	<div class="outer-container">
+		<div class="inner-container">
+    		<h2 id="page-title" class="page-title">Welcome to your Expense Tracker</h2>
+
+    		<div class="stats-grid">
+    			<div class="stat">
+    				<div class="view">Current Balance</div>
+    				<span class="euro">€0.00</span>
+    			</div>
+    			<div class="stat">
+    				<div class="view">Total Income</div>
+    				<span class="euro">€0.00</span>
+				</div>
+				<div class="stat">
+					<div class="view">Total Expense</div>
+					<span class="euro">€0.00</span>
+					<a class="btn btn--primary stat__cta" th:href="@{/expenses/new}">Add Expense</a>
+				</div>
+    		</div>
+
+    		<form th:action="@{/logout}" method="post">
+    			<button type="submit" class="btn btn--primary logout-btn">Logout</button>
+    		</form>
+
+
+		</div>
+	</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/css/tokens.css}" />
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/components.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <title>Login</title>
+
+</head>
+
+<body>
+
+	<div class="outer-container">
+		<div class="inner-container">
+
+		<div th:if="${successMessage != null}" style="color:green" th:text="${successMessage}"></div>
+
+		    <h2 class="page-title">Expense Tracker</h2>
+		    <p class="page-subtitle">Follow your money!</p>
+
+		    <form th:action="@{/login}" method="post" class="auth-form">
+		    <div class="form-group">
+			    <label for="email"></label>
+			   	<input type="email" name="email" placeholder="Enter email" required>
+			</div>
+
+			<div class="form-group">
+				<label for="password"></label>
+				<input type="password" name="password" placeholder="Enter password" required>
+			</div>
+
+			<div th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></div>
+				<button type="submit" class="btn btn--primary">Login</button>
+			</form>
+
+			    <a class="link-muted" th:href="@{/register}">Don't have an account? Click Here</a>
+		  </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+.auth-form {
+  	max-width: 500px;
+  	width: 100%;
+  	display: flex;
+  	flex-direction: column;
+  	text-align: center;
+}
+
+.form-group {
+  	display: flex;
+  	flex-direction: column;
+  	gap: 0.4rem;
+  	margin-bottom: 1rem;
+}
+
+.auth-form input {
+	width: 100%;
+  	padding: 1rem;
+  	width: 100%;
+  	box-sizing: border-box;
+  	border-radius: var(--radius);
+  	text-align: center;
+  	background-color: var(--primary-green);
+  	font-weight: bold;
+  	font-size: 1.5rem;
+  	color: var(--text-white);
+}
+
+.auth-form input::placeholder {
+  	font-weight: bold;
+  	font-size: 1.5rem;
+  	color: var(--text-white);
+}
+
+.auth-form button {
+  	display: block;
+  	margin: 1rem auto 0 auto;
+  	padding: 1rem;
+  	font-size: 1.5rem;
+  	width: 50%;
+  	font-weight: bold;
+  	color: var(--text-white);
+  	background-color: var(--button-blue);
+  	border-radius: var(--radius);
+  	border: none;
+  	font-family: inherit;
+  	letter-spacing: 0.5px;
+  	box-sizing: border-box;
+  	transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.auth-form button:hover {
+  	background-color: #2a27c9;
+  	cursor: pointer;
+}
+
+.auth-form button:active {
+  	transform: scale(0.98);
+}
+
+.btn {
+	display: inline-block;
+	padding: 1rem 1.5rem;
+	border: none;
+	border-radius: var(--radius);
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.1s ease;
+	color: white;
+}
+
+.btn--primary {
+	background: var(--button-blue);
+}
+
+.btn--primary:hover {background: #2a27c9;}
+.btn--primary:active {transform: scale(0.83);}
+
+.link-muted {
+	font-size: 0.8rem;
+}
+
+.back-link {
+	position: absolute;
+	display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-black);
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+}
+
+.arrow {
+	font-size: 1.4rem;
+}
+
+.back-text:hover {
+	text-decoration: underline;
+	cursor: pointer;
+	color: var(--primary-green);
+}
+

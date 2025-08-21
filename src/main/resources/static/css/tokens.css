@@ -1,0 +1,10 @@
+:root {
+  --bg-grey: #cfcfcf;
+  --primary-green: #678e79;
+  --text-black: #000000;
+  --button-blue: #3d38f5;
+  --text-white: #ffffff;
+  --text-muted: rgb(46, 46, 46);
+
+  --radius: 10px;
+}

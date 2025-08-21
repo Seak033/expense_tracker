@@ -1,0 +1,55 @@
+.dashboard .page-title {
+	position: absolute;
+	top: 2rem;
+	margin: 0;
+}
+
+.dashboard .inner-container {
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 6rem;
+}
+
+.dashboard .stats-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 10rem;
+
+	color: black;
+	font-weight: bold;
+}
+
+.dashboard .stat {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1rem 1.5rem;
+}
+
+.dashboard .view {
+	color: var(--primary-green);
+	font-weight: bold;
+	font-size: 1.7rem;
+}
+
+.dashboard .euro {
+	color: #000;
+	font-size: 1.3rem;
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+.dashboard.stat__cta {
+	position: static;
+	margin-top: 0.75rem;
+	align-self: flex-start;
+}
+
+.dashboard .logout-btn {
+	position: absolute;
+	top: 2rem;
+	right: 2.5rem;
+	z-index: 1000;
+	padding: 1rem 1.5rem;
+	font-size: 1rem;
+}
