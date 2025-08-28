@@ -2,21 +2,30 @@
 	position: absolute;
 	top: 2rem;
 	margin: 0;
+	font-size: 2rem;
+	grid-column: 2;
 }
 
 .dashboard .inner-container {
-	justify-content: flex-start;
-	align-items: center;
-	padding-top: 6rem;
-}
-
-.dashboard .stats-grid {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 10rem;
+	grid-auto-rows: min-content;
+	gap: 2rem 3rem;
+	align-items: start;
+	justify-items: stretch;
+	padding-top: 6rem;
 
+}
+
+/* ---------Stats row --------- */
+.dashboard .stats-grid {
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: space-evenly;
+	gap: 4rem;
 	color: black;
 	font-weight: bold;
+
 }
 
 .dashboard .stat {
@@ -26,26 +35,15 @@
 	padding: 1rem 1.5rem;
 }
 
-.dashboard .view {
-	color: var(--primary-green);
+.view {
+	color: black;
 	font-weight: bold;
 	font-size: 1.7rem;
 }
 
-.dashboard .euro {
-	color: #000;
-	font-size: 1.3rem;
-	font-weight: bold;
-	line-height: 1.2;
-}
 
-.dashboard.stat__cta {
-	position: static;
-	margin-top: 0.75rem;
-	align-self: flex-start;
-}
-
-.dashboard .logout-btn {
+/* -------- Logout -------- */
+.logout-btn {
 	position: absolute;
 	top: 2rem;
 	right: 2.5rem;
@@ -53,3 +51,16 @@
 	padding: 1rem 1.5rem;
 	font-size: 1rem;
 }
+
+.euro {
+	color: #000;
+	font-size: 1.3rem;
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+.euro.amount-positive { color: #006600 !important;}
+.euro.amount-negative { color: #a00000 !important;}
+.euro.amount-zero { color: #000000 !important;}
+
+

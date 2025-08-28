@@ -89,9 +89,4 @@ public class UserController {
 
         return "redirect:/login?success";
     }
-
-    @GetMapping("/dashboard")
-    public String dashboardPage() {
-        return "dashboard";
-    }
 }

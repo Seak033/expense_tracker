@@ -1,0 +1,175 @@
+
+/* ----------Expense list card ---------- */
+
+.dashboard .expense-list {
+	grid-column: 1 / -1;
+	width: 55%;
+	justify-self: end;
+	align-self: start;
+	margin-top: -2rem;
+	max-height: 70vh;
+	padding: 0;
+	grid-row: 2;
+	border-radius: var(--radius);
+	border: 2px solid var(--primary-green);
+	box-shadow: 8px 6px 8px rgba(0,0,0,0.15);
+	background-color: rgb(233, 233, 233);
+}
+
+/* Header bar (h3 + plus sign) */
+.expense-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid black;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+/* Round plus button at far right */
+.add-sign {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-green);
+  text-decoration: none;
+  border: 2px solid var(--primary-green);
+  border-radius: 50%;
+  line-height: 1;
+  transition: background 0.2s ease, color 0.2s ease;
+  margin-left: auto; /* ensures flush right inside header bar */
+}
+
+.add-sign:hover {background: var(--primary-green); color: #fff;}
+
+.expenses {
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: auto;
+}
+
+.expenses thead {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.expenses thead th {
+	position: sticky;
+	top: 2.5rem;
+	z-index: 2;
+}
+
+.expenses tbody {
+	display: block;
+	max-height: 60vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+.expenses tbody tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.expenses th, .expenses td {
+	padding: 0.3rem 1.5rem;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.expense-row {color: #a00000;}
+
+.income-row {color: rgb(0, 100, 0);}
+
+.amount-positive {color: #006600; font-weight: bold;}
+
+.amount-negative {color: #a00000; font-weight: bold;}
+
+.amount-zero {color: black;}
+
+.expenses td.actions-cell {
+	position: relative;
+	text-align: right;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: clip;
+	vertical-align: middle;
+	padding: 1rem 5.2rem 0.2rem 0;
+}
+
+.expenses td.actions-cell .amount-text {display: inline-block; padding-right: 3rem; line-height: 1;}
+
+.expenses td.actions-cell .row-actions  {
+	 position: absolute;
+	  top: 50%;
+	  right: 0.5rem;
+	  transform: translateY(-50%);
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 0.5rem;
+	  width: 4.6rem;
+	  justify-content: flex-end;
+	  margin: 0;
+}
+
+.expenses td.actions-cell .row-actions form {display: inline; margin: 0;}
+
+.expenses td.col-amount,
+.expenses td.actions-cell {
+  vertical-align: middle;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+/* Generic icon button */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  border: 2px solid var(--primary-green);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--primary-green);
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.icon-btn:hover {background: var(--primary-green); color: #fff;}
+
+/* Delete button variant */
+.icon-btn.danger {border-color: #a00000; color: #a00000;}
+
+.icon-btn.danger:hover {background: #a00000; color: #fff;}
+
+.expenses .col-date{width: 8.5rem;}
+.expenses .col-category,
+.expenses .col-amount {padding-left: 0.2rem;}
+
+.expenses .col-category {width: 15%;}
+
+.expenses .col-description {width: 40%;}
+
+

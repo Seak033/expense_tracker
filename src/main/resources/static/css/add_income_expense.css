@@ -1,0 +1,58 @@
+.auth-form {
+	max-width: 40%;
+}
+
+.page-title {
+	margin-bottom: 0;
+}
+
+.form-group {
+	gap: 0.5rem;
+}
+
+.segmented {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 0.5rem;
+}
+
+.segmented {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.segmented__item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  color: var(--text-black);
+  background-color: white;
+}
+
+.segmented__item input[type="radio"] {
+  display: none;
+}
+
+.segmented__item span {
+  pointer-events: none;
+}
+
+/* Selected state */
+.segmented__item input[type="radio"]:checked ~ span{
+  background-color: var(--primary-green);
+  color: var(--text-white);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius);
+}
+
+.segmented__item:has(input[type="radio"]:checked) {
+  background-color: var(--primary-green);
+  color: var(--text-white);
+}
