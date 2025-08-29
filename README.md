@@ -10,14 +10,16 @@ It helps users manage income and expenses, track spending habits, and visualize 
 - Search/filter transactions
 - Responsive UI for desktop and mobile (in development)
 
-##Screenshots
-![Dashboard](screenshots/dashboard.png)
+## Screenshots
 
 ### Login Page
 ![Login Page](screenshots/login-page.png)
 
 ### Create User
 ![Create User](screenshots/create-user-page.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
 ### Add Transactions Form
 ![Add Form](screenshots/add-form.png)
