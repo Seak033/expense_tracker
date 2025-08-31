@@ -25,8 +25,7 @@ public class User {
 	@Id
 	@SequenceGenerator(
 			name = "user_seq",
-			sequenceName = "user_seq",
-			allocationSize = 1)
+			sequenceName = "user_seq")
 	@GeneratedValue(
 			strategy = GenerationType.SEQUENCE,
 			generator = "user_seq")

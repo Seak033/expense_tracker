@@ -31,6 +31,7 @@ public class Category {
 	@Column(nullable = false, length = 64)
 	private String name;			// Category names like "Food", "Utilities"
 
+	// MAYBE I WILL ADD THIS FUNCTION IN THE FUTURE
 	@Column(nullable = false)
-	private boolean active = true;		// true = usable, false = disabled
+	private boolean active = true;		// true = usable, false = disabled.
 }
