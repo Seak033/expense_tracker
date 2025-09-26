@@ -1,150 +1,148 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" th:href="@{/css/tokens.css}" />
-    <link rel="stylesheet" th:href="@{/css/base.css}" />
-    <link rel="stylesheet" th:href="@{/css/components.css}" />
-    <link rel="stylesheet" th:href="@{/css/expense_income-list.css}" />
-    <link rel="stylesheet" th:href="@{/css/overview-list.css}" />
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
-    <title>Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" th:href="@{/css/tokens.css}" />
+  <link rel="stylesheet" th:href="@{/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/css/components.css}" />
+  <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+  <title>Dashboard</title>
 </head>
 <body class="dashboard">
 
-	<div class="outer-container">
-		<div class="inner-container">
-    		<h2 id="page-title" class="page-title">Welcome to your Expense Tracker</h2>
+  <div class="outer-container">
+    <div class="inner-container">
+      <h2 id="page-title" class="page-title">Welcome to your Expense Tracker</h2>
 
-    		<div class="stats-grid">
-    			<div class="stat" >
-    				<div class="view">Current Balance</div>
-    				<span class="euro"
-      				  th:classappend="${balance.signum() == 1 ? ' amount-positive '
-      				  				: (balance.signum() == -1 ? ' amount-negative ' : ' amount-zero ')}">
-					<span th:text="${balance.signum() == 1 ? '+' : (balance.signum() == -1 ? '-' : '')}"></span>
-    				€ <span th:text="${#numbers.formatDecimal(balance.abs(),1,'POINT',2,'COMMA')}"></span></span>
-    			</div>
-    			<div class="stat">
-    				<div class="view">Total Income</div>
-    				<span class="euro">€ <span th:text="${#numbers.formatDecimal(totalIncome,1,'POINT',2,'COMMA')}"></span></span>
-				</div>
-				<div class="stat">
-					<div class="view">Total Expense</div>
-    				<span class="euro">€ <span th:text="${#numbers.formatDecimal(totalExpense,1,'POINT',2,'COMMA')}"></span></span>
-				</div>
-    		</div>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="view">Current Balance</div>
+          <span class="euro"
+                th:classappend="${balance.signum() == 1 ? ' amount-positive ' : (balance.signum() == -1 ? ' amount-negative ' : ' amount-zero ')}">
+            <span th:text="${balance.signum() == 1 ? '+' : (balance.signum() == -1 ? '-' : '')}"></span>
+            € <span th:text="${#numbers.formatDecimal(balance.abs(),1,'POINT',2,'COMMA')}"></span>
+          </span>
+        </div>
+        <div class="stat">
+          <div class="view">Total Income</div>
+          <span class="euro">€ <span th:text="${#numbers.formatDecimal(totalIncome,1,'POINT',2,'COMMA')}"></span></span>
+        </div>
+        <div class="stat">
+          <div class="view">Total Expense</div>
+          <span class="euro">€ <span th:text="${#numbers.formatDecimal(totalExpense,1,'POINT',2,'COMMA')}"></span></span>
+        </div>
+      </div>
 
-    		<form th:action="@{/logout}" method="post">
-    			<button type="submit" class="btn btn--primary logout-btn">Logout</button>
-    		</form>
+      <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn--primary logout-btn">Logout</button>
+      </form>
 
-    		<section class="overview">
-    			<div class="overview-header">
-    				<h3>Overview</h3>
+      <section class="overview">
+        <div class="overview-header">
+          <h3>Overview</h3>
+          <form th:action="@{/dashboard}" method="get" class="year-select-form">
+            <select name="year" th:value="${selectedYear}" onchange="this.form.submit()">
+              <option th:each="y : ${years}" th:value="${y}" th:text="${y}"
+                      th:selected="${y} == ${selectedYear}"></option>
+            </select>
+            <input type="hidden" name="month" th:if="${selectedMonth != null}" th:value="${selectedMonth}">
+            <input type="hidden" name="type" th:if="${selectedType != null}" th:value="${selectedType}">
+          </form>
+        </div>
 
-    				<form th:action="@{/dashboard}" method="get" class="year-select-form">
-    					<select name="year" th:value="${selectedYear}" onchange="this.form.submit()">
-    						<option th:each="y : ${years}" th:value="${y}" th:text="${y}"
-    								th:selected="${y} == ${selectedYear}"></option>
-    					</select>
+        <table class="overview-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th class="num">Income</th>
+              <th class="num">Expense</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="m : ${overview}">
+              <td>
+                <a th:href="@{/dashboard(year=${selectedYear}, month=${m.month})}"
+                   th:text="${T(java.time.Month).of(m.month).name()}">JANUARY</a>
+              </td>
+              <td class="num"
+                  th:classappend="${m.income.signum()==0 ? 'amount-zero' : 'amount-positive'}">
+                <span th:text="${m.income.signum()==0 ? '€ ' : '+ € '}"></span>
+                <span th:text="${#numbers.formatDecimal(m.income.abs(),1,'POINT',2,'COMMA')}">0.00</span>
+              </td>
+              <td class="num amount-negative"
+                  th:classappend="${m.expense.signum()==0 ? 'amount-zero' : 'amount-negative'}">
+                <span th:text="${m.expense.signum()==0 ? '€ ' : '- € '}"></span>
+                <span th:text="${#numbers.formatDecimal(m.expense.abs(),1,'POINT',2,'COMMA')}">0.00</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-    					<input type="hidden" name="month" th:if="${selectedMonth != null}" th:value="${selectedMonth}">
-    					<input type="hidden" name="type" th:if="${selectedType != null}" th:value="${selectedType}">
-    				</form>
-    			</div>
+      <section class="expense-list">
+        <h3 class="expense-list-header">
+          Recent Transactions
+          <a th:href="@{/transactions/new}" class="add-sign" title="Add income-expense">+</a>
+        </h3>
 
-				<table class="overview-table">
-					<thead>
-						<tr>
-							<th>Month</th>
-							<th class="num">Income</th>
-							<th class="num">Expense</th>
-						</tr>
-					</thead>
+        <table class="expenses">
+          <thead>
+            <tr>
+              <th class="col-date">Date</th>
+              <th class="col-category">Category</th>
+              <th class="col-description">Description</th>
+              <th class="col-amount">Amount</th>
+            </tr>
+          </thead>
 
-					<tbody>
-						<tr th:each="m : ${overview}">
-							<td>
-								<a th:href="@{/dashboard(year=${selectedYear}, month=${m.month})}"
-								   th:text="${T(java.time.Month).of(m.month).name()}">JANUARY</a>
-							</td>
+          <tbody>
+            <th:block th:each="tx : ${transactions}"
+                      th:with="isEnum=${tx.type != null ? tx.type.name() : ''}">
+              <tr th:classappend="${isEnum == 'EXPENSE'} ? 'expense-row' : 'income-row'">
+                <td class="col-date" th:text="${#temporals.format(tx.date, 'dd-MM-yyyy')}"></td>
+                <td class="col-category" th:text="${tx.category != null ? tx.category.name : 'INCOME'}"></td>
+                <td class="col-description" th:text="${tx.description}"></td>
+                <td class="col-amount actions-cell">
+                  <span class="amount-text">
+                    <span th:text="${isEnum == 'EXPENSE' ? '-' : '+'}"></span>
+                    € <span th:text="${#numbers.formatDecimal(tx.amount,1,'POINT',2,'COMMA')}"></span>
+                  </span>
 
-							<!-- Income -->
-							<td class="num amount-positve"
-					            th:classappend="${m.income.signum() == 0 ? 'amount-zero' : 'amount-positive'}">
-					            <span th:text="${m.income.signum() == 0 ? '€ ' : '+ € '}"></span>
-					            <span th:text="${#numbers.formatDecimal(m.income.abs(),1,'POINT',2,'COMMA')}">0.00</span>
-					        </td>
+                  <!-- inline actions (desktop/tablet) -->
+                  <div class="row-actions">
+                    <a class="icon-btn" th:href="@{|/transactions/${tx.id}/edit|}" title="Edit" aria-label="Edit">✏️</a>
+                    <form th:action="@{|/transactions/${tx.id}/delete|}" method="post"
+                          onsubmit="return confirm('Delete this transaction?');">
+                      <button type="submit" class="icon-btn danger" title="Delete" aria-label="Delete">🗑️</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
 
-							<!-- Expense -->
-							<td class="num amount-negative"
-					            th:classappend="${m.expense.signum() == 0 ? 'amount-zero' : 'amount-negative'}">
-					            <span th:text="${m.expense.signum() == 0 ? '€ ' : '- € '}"></span>
-					            <span th:text="${#numbers.formatDecimal(m.expense.abs(),1,'POINT',2,'COMMA')}">0.00</span>
-					        </td>
-						</tr>
-					</tbody>
+              <!-- mobile-only centered actions row -->
+              <tr class="row-actions-mobile">
+                <td colspan="4">
+                  <div class="row-actions">
+                    <a class="icon-btn" th:href="@{|/transactions/${tx.id}/edit|}" title="Edit" aria-label="Edit">✏️</a>
+                    <form th:action="@{|/transactions/${tx.id}/delete|}" method="post"
+                          onsubmit="return confirm('Delete this transaction?');">
+                      <button type="submit" class="icon-btn danger" title="Delete" aria-label="Delete">🗑️</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            </th:block>
 
-				</table>
-    		</section>
+            <tr th:if="${#lists.isEmpty(transactions)}">
+              <td colspan="4" style="text-align:center;">No expenses yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-    		<section class="expense-list">
-    			<h3 class="expense-list-header">Recent Transactions
-    			<a th:href="@{/transactions/new}" class="add-sign" title="Add income-expense">+</a>
-    			</h3>
-
-    			<table class="expenses">
-    				<thead>
-    					<tr>
-    						<th class="col-date">Date</th>
-    						<th class="col-category">Category</th>
-    						<th class="col-description">Description</th>
-    						<th class="col-amount">Amount</th>
-    					</tr>
-    				</thead>
-    				<tbody>
-    					<tr th:each="tx : ${transactions}"
-    						th:with="isEnum=${tx.type != null ? tx.type.name() : ''}"
-    						th:classappend="${isEnum == 'EXPENSE'} ? 'expense-row' : 'income-row'">
-    						<td class="col-date" th:text="${#temporals.format(tx.date, 'dd-MM-yyyy')}"></td>
-    						<td class="col-category" th:text="${tx.category != null ? tx.category.name : 'INCOME'}"></td>
-    						<td class="col-description" th:text="${tx.description}"></td>
-    						<td class="col-amount actions-cell">
-    							<span class="amount-text">
-    							<span th:text="${isEnum == 'EXPENSE' ? '-' : '+'}"></span>
-    							€ <span th:text="${#numbers.formatDecimal(tx.amount,1,'POINT',2,'COMMA')}"></span>
-    							</span>
-
-    							<div class="row-actions">
-    							<a class="icon-btn" th:href="@{|/transactions/${tx.id}/edit|}" title="Edit" aria-label="Edit">✏️</a>
-
-    							<form th:action="@{|/transactions/${tx.id}/delete|}" method="post"
-    								  onsubmit="return confirm('Delete this transaction?');">
-
-    								<button type="submit" class="icon-btn danger" title="Delete" aria-label="Delete">🗑️</button>
-
-    							</form>
-
-    							</div>
-
-
-    						</td>
-    					</tr>
-
-    					<tr th:if="${#lists.isEmpty(transactions)}">
-    						<td colspan="4" style="text-align:center;">No expenses yet.</td>
-    					</tr>
-    				</tbody>
-    			</table>
-    		</section>
-
-
-		</div>
-	</div>
-
-
+    </div>
+  </div>
 
 </body>
 </html>
